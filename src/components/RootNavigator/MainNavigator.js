@@ -12,8 +12,10 @@ import PlatformNavigator from "./PlatformNavigator";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
 import AppsIcon from "../../icons/Apps";
+import LearnIcon from "../../icons/Learn";
 import MarketNavigator from "./MarketNavigator";
 import Tab from "./CustomBlockRouterNavigator";
+import Learn from "../../screens/Learn";
 
 type RouteParams = {
   hideTabNavigation?: boolean,
@@ -25,6 +27,7 @@ export default function MainNavigator({
 }) {
   const { colors } = useTheme();
   const { hideTabNavigation } = params || {};
+  const enableLearn = true; // useFeature("learn");
   return (
     <Tab.Navigator
       screenOptions={{
@@ -48,20 +51,33 @@ export default function MainNavigator({
           tabBarIcon: (props: any) => <PortfolioTabIcon {...props} />,
         }}
       />
-      <Tab.Screen
-        name={NavigatorName.Accounts}
-        component={AccountsNavigator}
-        listeners={({ route, navigation }) => ({
-          tabPress: () => navigation.navigate(route.name),
-        })}
-        options={{
-          unmountOnBlur: true,
-          tabBarIcon: (props: any) => (
-            <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
-          ),
-          tabBarTestID: "TabBarAccounts",
-        }}
-      />
+      {enableLearn ? (
+        <Tab.Screen
+          name={NavigatorName.Learn}
+          component={Learn}
+          options={{
+            unmountOnBlur: true,
+            tabBarIcon: (props: any) => (
+              <TabIcon Icon={LearnIcon} i18nKey="tabs.learn" {...props} />
+            ),
+          }}
+        />
+      ) : (
+        <Tab.Screen
+          name={NavigatorName.Accounts}
+          component={AccountsNavigator}
+          listeners={({ route, navigation }) => ({
+            tabPress: () => navigation.navigate(route.name),
+          })}
+          options={{
+            unmountOnBlur: true,
+            tabBarIcon: (props: any) => (
+              <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
+            ),
+            tabBarTestID: "TabBarAccounts",
+          }}
+        />
+      )}
       <Tab.Screen
         name={ScreenName.Transfer}
         component={Transfer}
