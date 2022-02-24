@@ -61,6 +61,7 @@ export default function MainNavigator({
                 Icon={Icons.GraduationMedium}
                 i18nKey="tabs.learn"
                 {...props}
+                iconSize={25}
               />
             ),
           }}
