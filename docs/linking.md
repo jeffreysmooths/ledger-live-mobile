@@ -1,7 +1,7 @@
 ### Deep Linking 🔗
 
 Several URI schemes are available for deep linking from external sources
-They all are prefixed by **_ledgerlive://_**
+They all are prefixed by **_QFSledgerlive://_**
 
 - **_portfolio_** 🠒 Portfolio page (default landing)
 
